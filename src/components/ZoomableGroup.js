@@ -54,7 +54,7 @@ ZoomableGroup.propTypes = {
   onMove: PropTypes.func,
   onMoveEnd: PropTypes.func,
   className: PropTypes.string,
-  disablePanning: PropTypes.boolean,
+  disablePanning: PropTypes.bool,
 }
 
 export default ZoomableGroup
