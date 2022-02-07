@@ -20,7 +20,7 @@ export default function useZoomPan({
   translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
   scaleExtent = [1, 8],
   zoom = 1,
-  disablePanning = false,
+  disableZoomPan = false,
 }) {
   const { width, height, projection } = useContext(MapContext)
 
@@ -41,13 +41,13 @@ export default function useZoomPan({
 
     function handleZoomStart(d3Event) {
       if (!onMoveStart || bypassEvents.current) return
-      if (disablePanning) return
+      if (disableZoomPan) return
       onMoveStart({ coordinates: projection.invert(getCoords(width, height, d3Event.transform)), zoom: d3Event.transform.k }, d3Event)
     }
   
     function handleZoom(d3Event) {
       if (bypassEvents.current) return
-      if (disablePanning) return
+      if (disableZoomPan) return
       const {transform, sourceEvent} = d3Event
       setPosition({ x: transform.x, y: transform.y, k: transform.k, dragging: sourceEvent })
       if (!onMove) return
@@ -59,7 +59,7 @@ export default function useZoomPan({
         bypassEvents.current = false
         return
       }
-      if (disablePanning) return
+      if (disableZoomPan) return
       const [x, y] = projection.invert(getCoords(width, height, d3Event.transform))
       lastPosition.current = { x, y, k: d3Event.transform.k }
       if (!onMoveEnd) return

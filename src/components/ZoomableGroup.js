@@ -16,7 +16,7 @@ const ZoomableGroup = ({
   onMove,
   onMoveEnd,
   className,
-  disablePanning,
+  disableZoomPan = false,
   ...restProps
 }) => {
   const { width, height } = useContext(MapContext)
@@ -33,7 +33,7 @@ const ZoomableGroup = ({
     scaleExtent: [minZoom, maxZoom],
     translateExtent,
     zoom,
-    disablePanning
+    disableZoomPan
   })
 
   return (
@@ -54,7 +54,7 @@ ZoomableGroup.propTypes = {
   onMove: PropTypes.func,
   onMoveEnd: PropTypes.func,
   className: PropTypes.string,
-  disablePanning: PropTypes.bool,
+  disableZoomPan: PropTypes.bool,
 }
 
 export default ZoomableGroup
