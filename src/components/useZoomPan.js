@@ -83,7 +83,7 @@ export default function useZoomPan({
 
     zoomRef.current = zoom
     svg.call(zoom)
-  }, [width, height, a1, a2, b1, b2, minZoom, maxZoom, projection, onMoveStart, onMove, onMoveEnd, filterZoomEvent])
+  }, [width, height, a1, a2, b1, b2, minZoom, maxZoom, projection, onMoveStart, onMove, onMoveEnd, filterZoomEvent, disableZoomPan])
 
   useEffect(() => {
     if (lon === lastPosition.current.x && lat === lastPosition.current.y && zoom === lastPosition.current.k) return
