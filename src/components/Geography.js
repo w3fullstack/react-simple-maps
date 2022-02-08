@@ -20,13 +20,13 @@ const Geography = ({
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.addEventListener('mousedown', () => console.log('mouse_down_ref'));
+      ref.current.addEventListener('mousedown', handleMouseDown);
+      ref.current.addEventListener('mouseup', handleMouseDown);
     }
   }, [ref]);
 
   function handleMouseEnter(evt) {
     setFocus(true)
-    console.log('mouse_enter');
     if (onMouseEnter) onMouseEnter(evt)
   }
 
@@ -49,7 +49,6 @@ const Geography = ({
 
   function handleMouseDown(evt) {
     setPressed(true)
-    console.log('mouse_down');
     if (onMouseDown) onMouseDown(evt)
   }
 
@@ -68,8 +67,6 @@ const Geography = ({
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
       onBlur={handleBlur}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
       style={style[isPressed || isFocused ? (isPressed ? "pressed" : "hover") : "default"]}
       {...restProps}
     />
