@@ -1,5 +1,5 @@
 
-import React, { useState, memo } from "react"
+import React, { useState, memo, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 
 const Geography = ({
@@ -16,9 +16,17 @@ const Geography = ({
 }) => {
   const [isPressed, setPressed] = useState(false)
   const [isFocused, setFocus] = useState(false)
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.addEventListener('mousedown', () => console.log('mouse_down_ref'));
+    }
+  }, [ref]);
 
   function handleMouseEnter(evt) {
     setFocus(true)
+    console.log('mouse_enter');
     if (onMouseEnter) onMouseEnter(evt)
   }
 
@@ -41,6 +49,7 @@ const Geography = ({
 
   function handleMouseDown(evt) {
     setPressed(true)
+    console.log('mouse_down');
     if (onMouseDown) onMouseDown(evt)
   }
 
@@ -51,6 +60,7 @@ const Geography = ({
 
   return (
     <path
+      ref={ref}
       tabIndex="0"
       className={`rsm-geography ${className}`}
       d={geography.svgPath}
